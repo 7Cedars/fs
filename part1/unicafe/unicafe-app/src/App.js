@@ -6,18 +6,41 @@ const Button = ({ handleClick, text }) => (
   </button>
 )
 
+const StatisticsLine = (props) => {
+  return (
+      <tr>
+        <td> {props.text} </td>
+        <td> {props.value} </td>
+      </tr>
+  )
+}
+
 const Statistics = (props) => {
  
   let allRatings = props.good + props.neutral + props.bad
   let averagelRatings = (props.good +-(props.bad)) / allRatings
   let positiveRatings = props.good / allRatings
 
+  if (allRatings === 0) {
     return (
       <div>
-        All: {allRatings} <br />
-        Average: {averagelRatings} <br />
-        Positive: {positiveRatings} <br />
+        No feedback has been given.  
       </div>
+    )
+
+  }
+
+    return (
+      <table>
+        <tbody>
+          <StatisticsLine text='Good' value={props.good} /> 
+          <StatisticsLine text='Neutral' value={props.neutral} /> 
+          <StatisticsLine text='Bad' value={props.bad} /> 
+          <StatisticsLine text='All' value={allRatings} /> 
+          <StatisticsLine text='Average' value={averagelRatings} /> 
+          <StatisticsLine text='Positive' value={positiveRatings} /> 
+        </tbody>
+      </table>
     )
 }
 
@@ -51,9 +74,6 @@ const App = () => {
       <h1>
         Statistics
       </h1>
-      Good: {good} <br /> 
-      Neutral: {neutral} <br />
-      Bad: {bad} <br />
       <Statistics 
           good = { good} 
           neutral = { neutral} 
