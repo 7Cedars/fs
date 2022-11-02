@@ -5,11 +5,9 @@
 
 import { useState, useEffect } from 'react'
 import PersonsForm from './components/personForm'
-import axios from 'axios'
 import itemService from './services/personItems'
 import PersonLine from './components/personLine'
 import Notification from './components/Notification'
-import { toBeChecked } from '@testing-library/jest-dom/dist/matchers'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -28,14 +26,8 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
-        setPersonsToShow(response.data)
-      })
-  }, [])
+    setPersonsToShow(persons)
+  }, [persons])
   
   const addPerson = (event) => {
     event.preventDefault()
@@ -66,7 +58,7 @@ const App = () => {
             itemService
             .update(doubleEntry.id, entryObject)
             .then(returnedItem => 
-              setPersons(persons.map(person => person.id === doubleEntry.id ? entryObject : person)),
+              setPersons(persons.map(person => person.id === doubleEntry.id ? returnedItem : person)),
               setNewName(""),
               setNewNumber("")
               )
@@ -88,9 +80,6 @@ const App = () => {
     if (window.confirm(`Delete the entry for ${_Person.name}?`)) {
       itemService
         .deleteItem(id)
-        .then(
-          setPersons(persons.map(person => person.id === id ? null : person)),
-        )
         .catch(error => {
             setErrorMessage(
               `Information of '${_Person.name}' was already removed from server`
@@ -100,6 +89,12 @@ const App = () => {
             }, 5000)
         })
     }
+    itemService
+    .getAll()
+    .then(returnedItems =>
+       setPersons(returnedItems)
+    )
+  console.log(persons)
   }
 
   const handleNameChange = (event) => {

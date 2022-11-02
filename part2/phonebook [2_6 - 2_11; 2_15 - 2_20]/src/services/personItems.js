@@ -1,3 +1,6 @@
+// Note to self: command used to set up temp server is:  
+// npx json-server --port 3001 --watch db.json
+
 import axios from 'axios'
 
 const baseUrl = 'http://localhost:3001/persons'
