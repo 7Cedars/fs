@@ -1,0 +1,58 @@
+GET http://localhost:3001/api/notes
+
+### 
+GET http://localhost:3001/api/notes/636239eaccfc6a58ba0452df
+
+### 
+GET http://localhost:3001/api/notes/999
+
+### 
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjYzNzVmODllNGI3OWZhNDZmMmZiOWU2NCIsImlhdCI6MTY2ODY3NjI4NH0.qkKFLaqlpecl6igXxkK5DK9LCcPE1PX2J6epubG2s44
+
+{
+    "content": "Hellllloooo!", 
+    "important": true
+}
+
+### 
+PUT http://localhost:3001/api/notes/63625ab5938402179d75d7fb
+Content-Type: application/json
+
+{
+    "content": "Lalilaewewlal", 
+    "important": false
+}
+
+### 
+PUT http://localhost:3001/api/notes/6362477f2e86dc87efbfbf65
+Content-Type: application/json
+
+{
+    "content": "Whoops that was a spelling mistake", 
+    "important": true
+}
+
+### 
+DELETE http://localhost:3001/api/notes/636239f3c806dc84108d6621
+
+### 
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+    "username": "7Cedars",
+    "name": "Cedars Seven",
+    "password": "PleaseLetMeIn!"
+}
+
+### 
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+    "username": "root",
+    "password": "salainen"
+}
+
